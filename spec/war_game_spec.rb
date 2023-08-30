@@ -83,10 +83,13 @@ describe 'WarGame' do
     fit 'returns appropriate messages when there is a tie' do
       player1 = WarPlayer.new('Muffin', hand: [
         PlayingCard.new('A', 'S'),
-                                PlayingCard.new('A', 'C'),
-                                PlayingCard.new('J', 'C')
+        PlayingCard.new('A', 'C'),
+        PlayingCard.new('J', 'C')
       ])
-      player2 = WarPlayer.new('Potato', hand: [PlayingCard.new('A', 'H'), PlayingCard.new('Q', 'S')])
+      player2 = WarPlayer.new('Potato', hand: [
+        PlayingCard.new('A', 'H'),
+        PlayingCard.new('Q', 'S')
+      ])
       game = WarGame.new(player1: player1, player2: player2)
       round_results = game.play_round
       expect(game.winner).to eq player1

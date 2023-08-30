@@ -20,7 +20,7 @@ class WarSocketServer
     @server.accept_nonblock
     # associate player and client
   rescue IO::WaitReadable, Errno::EINTR
-    Rails.logger.debug 'No client to accept'
+    puts 'No client to accept'
   end
 
   def create_game_if_possible; end

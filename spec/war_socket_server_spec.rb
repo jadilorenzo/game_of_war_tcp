@@ -26,7 +26,7 @@ class MockWarSocketClient
   end
 end
 
-xdescribe WarSocketServer do
+describe WarSocketServer do
   before(:each) do
     @clients = []
     @server = WarSocketServer.new

@@ -2,6 +2,7 @@
 
 require_relative 'war_player'
 require_relative 'card_deck'
+require_relative 'round_results'
 
 # WarGame is a class based off the rules of https://gamerules.com/rules/war-card-game/
 class WarGame
@@ -39,9 +40,10 @@ class WarGame
   def play_round(cards_in_play = [])
     player1_card = player1.play
     player2_card = player2.play
-    cards_in_play += [player1.play, player1.play].compact
+    cards_in_play += [player1_card, player2_card].compact
 
     return finish_round(cards_in_play) unless check_for_game_winner.nil?
+    return play_round(cards_in_play) if is_tie?(player1_card, player2_card)
 
     give_cards_to_round_winner(cards_in_play: cards_in_play, player1_card: player1_card, player2_card: player2_card)
 
@@ -50,10 +52,12 @@ class WarGame
 
   private
 
+  def is_tie?(player1_card, player2_card)
+    player1_card.value == player2_card.value
+  end
+
   def give_cards_to_round_winner(cards_in_play:, player1_card:, player2_card:)
-    if player1_card.value == player2_card.value
-      play_round(cards_in_play)
-    elsif player1_card.value > player2_card.value
+    if player1_card.value > player2_card.value
       player1.take(cards_in_play.shuffle)
     else
       player2.take(cards_in_play.shuffle)
