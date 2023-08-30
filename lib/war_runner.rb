@@ -4,5 +4,5 @@ require_relative 'war_game'
 
 game = WarGame.new
 game.start
-Rails.logger.debug game.play_round until game.winner
-Rails.logger.debug { "Winner: #{game.winner.name}" }
+puts game.play_round until game.winner
+puts "Winner: #{game.winner.name}"
